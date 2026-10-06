@@ -1,0 +1,1323 @@
+<!doctype html>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Vim Reps</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Sans+Condensed:wght@500;600&display=swap">
+<style>
+/* CodeMirror 5.65.16 base + dialog styles (MIT) */
+.CodeMirror{font-family:monospace;height:300px;color:#000;direction:ltr}.CodeMirror-lines{padding:4px 0}.CodeMirror pre.CodeMirror-line,.CodeMirror pre.CodeMirror-line-like{padding:0 4px}.CodeMirror-gutter-filler,.CodeMirror-scrollbar-filler{background-color:#fff}.CodeMirror-gutters{border-right:1px solid #ddd;background-color:#f7f7f7;white-space:nowrap}.CodeMirror-linenumber{padding:0 3px 0 5px;min-width:20px;text-align:right;color:#999;white-space:nowrap}.CodeMirror-guttermarker{color:#000}.CodeMirror-guttermarker-subtle{color:#999}.CodeMirror-cursor{border-left:1px solid #000;border-right:none;width:0}.CodeMirror div.CodeMirror-secondarycursor{border-left:1px solid silver}.cm-fat-cursor .CodeMirror-cursor{width:auto;border:0!important;background:#7e7}.cm-fat-cursor div.CodeMirror-cursors{z-index:1}.cm-fat-cursor .CodeMirror-line::selection,.cm-fat-cursor .CodeMirror-line>span::selection,.cm-fat-cursor .CodeMirror-line>span>span::selection{background:0 0}.cm-fat-cursor .CodeMirror-line::-moz-selection,.cm-fat-cursor .CodeMirror-line>span::-moz-selection,.cm-fat-cursor .CodeMirror-line>span>span::-moz-selection{background:0 0}.cm-fat-cursor{caret-color:transparent}@-moz-keyframes blink{50%{background-color:transparent}}@-webkit-keyframes blink{50%{background-color:transparent}}@keyframes blink{50%{background-color:transparent}}.cm-tab{display:inline-block;text-decoration:inherit}.CodeMirror-rulers{position:absolute;left:0;right:0;top:-50px;bottom:0;overflow:hidden}.CodeMirror-ruler{border-left:1px solid #ccc;top:0;bottom:0;position:absolute}.cm-s-default .cm-header{color:#00f}.cm-s-default .cm-quote{color:#090}.cm-negative{color:#d44}.cm-positive{color:#292}.cm-header,.cm-strong{font-weight:700}.cm-em{font-style:italic}.cm-link{text-decoration:underline}.cm-strikethrough{text-decoration:line-through}.cm-s-default .cm-keyword{color:#708}.cm-s-default .cm-atom{color:#219}.cm-s-default .cm-number{color:#164}.cm-s-default .cm-def{color:#00f}.cm-s-default .cm-variable-2{color:#05a}.cm-s-default .cm-type,.cm-s-default .cm-variable-3{color:#085}.cm-s-default .cm-comment{color:#a50}.cm-s-default .cm-string{color:#a11}.cm-s-default .cm-string-2{color:#f50}.cm-s-default .cm-meta{color:#555}.cm-s-default .cm-qualifier{color:#555}.cm-s-default .cm-builtin{color:#30a}.cm-s-default .cm-bracket{color:#997}.cm-s-default .cm-tag{color:#170}.cm-s-default .cm-attribute{color:#00c}.cm-s-default .cm-hr{color:#999}.cm-s-default .cm-link{color:#00c}.cm-s-default .cm-error{color:red}.cm-invalidchar{color:red}.CodeMirror-composing{border-bottom:2px solid}div.CodeMirror span.CodeMirror-matchingbracket{color:#0b0}div.CodeMirror span.CodeMirror-nonmatchingbracket{color:#a22}.CodeMirror-matchingtag{background:rgba(255,150,0,.3)}.CodeMirror-activeline-background{background:#e8f2ff}.CodeMirror{position:relative;overflow:hidden;background:#fff}.CodeMirror-scroll{overflow:scroll!important;margin-bottom:-50px;margin-right:-50px;padding-bottom:50px;height:100%;outline:0;position:relative;z-index:0}.CodeMirror-sizer{position:relative;border-right:50px solid transparent}.CodeMirror-gutter-filler,.CodeMirror-hscrollbar,.CodeMirror-scrollbar-filler,.CodeMirror-vscrollbar{position:absolute;z-index:6;display:none;outline:0}.CodeMirror-vscrollbar{right:0;top:0;overflow-x:hidden;overflow-y:scroll}.CodeMirror-hscrollbar{bottom:0;left:0;overflow-y:hidden;overflow-x:scroll}.CodeMirror-scrollbar-filler{right:0;bottom:0}.CodeMirror-gutter-filler{left:0;bottom:0}.CodeMirror-gutters{position:absolute;left:0;top:0;min-height:100%;z-index:3}.CodeMirror-gutter{white-space:normal;height:100%;display:inline-block;vertical-align:top;margin-bottom:-50px}.CodeMirror-gutter-wrapper{position:absolute;z-index:4;background:0 0!important;border:none!important}.CodeMirror-gutter-background{position:absolute;top:0;bottom:0;z-index:4}.CodeMirror-gutter-elt{position:absolute;cursor:default;z-index:4}.CodeMirror-gutter-wrapper ::selection{background-color:transparent}.CodeMirror-gutter-wrapper ::-moz-selection{background-color:transparent}.CodeMirror-lines{cursor:text;min-height:1px}.CodeMirror pre.CodeMirror-line,.CodeMirror pre.CodeMirror-line-like{-moz-border-radius:0;-webkit-border-radius:0;border-radius:0;border-width:0;background:0 0;font-family:inherit;font-size:inherit;margin:0;white-space:pre;word-wrap:normal;line-height:inherit;color:inherit;z-index:2;position:relative;overflow:visible;-webkit-tap-highlight-color:transparent;-webkit-font-variant-ligatures:contextual;font-variant-ligatures:contextual}.CodeMirror-wrap pre.CodeMirror-line,.CodeMirror-wrap pre.CodeMirror-line-like{word-wrap:break-word;white-space:pre-wrap;word-break:normal}.CodeMirror-linebackground{position:absolute;left:0;right:0;top:0;bottom:0;z-index:0}.CodeMirror-linewidget{position:relative;z-index:2;padding:.1px}.CodeMirror-rtl pre{direction:rtl}.CodeMirror-code{outline:0}.CodeMirror-gutter,.CodeMirror-gutters,.CodeMirror-linenumber,.CodeMirror-scroll,.CodeMirror-sizer{-moz-box-sizing:content-box;box-sizing:content-box}.CodeMirror-measure{position:absolute;width:100%;height:0;overflow:hidden;visibility:hidden}.CodeMirror-cursor{position:absolute;pointer-events:none}.CodeMirror-measure pre{position:static}div.CodeMirror-cursors{visibility:hidden;position:relative;z-index:3}div.CodeMirror-dragcursors{visibility:visible}.CodeMirror-focused div.CodeMirror-cursors{visibility:visible}.CodeMirror-selected{background:#d9d9d9}.CodeMirror-focused .CodeMirror-selected{background:#d7d4f0}.CodeMirror-crosshair{cursor:crosshair}.CodeMirror-line::selection,.CodeMirror-line>span::selection,.CodeMirror-line>span>span::selection{background:#d7d4f0}.CodeMirror-line::-moz-selection,.CodeMirror-line>span::-moz-selection,.CodeMirror-line>span>span::-moz-selection{background:#d7d4f0}.cm-searching{background-color:#ffa;background-color:rgba(255,255,0,.4)}.cm-force-border{padding-right:.1px}@media print{.CodeMirror div.CodeMirror-cursors{visibility:hidden}}.cm-tab-wrap-hack:after{content:''}span.CodeMirror-selectedtext{background:0 0}
+.CodeMirror-dialog{position:absolute;left:0;right:0;background:inherit;z-index:15;padding:.1em .8em;overflow:hidden;color:inherit}.CodeMirror-dialog-top{border-bottom:1px solid #eee;top:0}.CodeMirror-dialog-bottom{border-top:1px solid #eee;bottom:0}.CodeMirror-dialog input{border:none;outline:0;background:0 0;width:20em;color:inherit;font-family:monospace}.CodeMirror-dialog button{font-size:70%}
+
+/* Layout: a fixed rail of modules on the left, one working column on the right:
+   goal, your buffer beside the target, a vim-style statusline, then the scorecard. */
+:root {
+  --bg: #eceff4; --panel: #f7f8fb; --buffer: #ffffff; --ink: #1c2333; --muted: #596277; --line: #d3d8e3;
+  --accent: #a85a00; --accent-soft: #f8e6c8; --cursor: rgba(214, 134, 30, .45);
+  --ok: #17755a; --ok-soft: #d6efe5; --bad: #b0362c; --bad-soft: #f8dedb;
+  --aim: #3554d1; --aim-soft: #dfe5fb; --sel: #cfd9f5;
+  --mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+  --sans: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --cond: "IBM Plex Sans Condensed", "IBM Plex Sans", "Arial Narrow", sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #151924; --panel: #1c2130; --buffer: #10131b; --ink: #e3e7f0; --muted: #98a2b8; --line: #2d3446;
+    --accent: #f0a63c; --accent-soft: #3b2d14; --cursor: rgba(240, 166, 60, .5);
+    --ok: #4cc79d; --ok-soft: #143328; --bad: #ef7c6f; --bad-soft: #3d1c19;
+    --aim: #8ea6ff; --aim-soft: #222c54; --sel: #2c3a66;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #151924; --panel: #1c2130; --buffer: #10131b; --ink: #e3e7f0; --muted: #98a2b8; --line: #2d3446;
+  --accent: #f0a63c; --accent-soft: #3b2d14; --cursor: rgba(240, 166, 60, .5);
+  --ok: #4cc79d; --ok-soft: #143328; --bad: #ef7c6f; --bad-soft: #3d1c19;
+  --aim: #8ea6ff; --aim-soft: #222c54; --sel: #2c3a66;
+  color-scheme: dark;
+}
+
+html, body { height: 100%; }
+body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--sans); font-size: 15px; line-height: 1.5; }
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+button { font: inherit; color: inherit; cursor: pointer; }
+:focus-visible { outline: 2px solid var(--aim); outline-offset: 2px; }
+code, kbd { font-family: var(--mono); font-size: .92em; }
+code { background: var(--accent-soft); color: var(--ink); padding: .05em .35em; border-radius: 3px; white-space: pre; }
+kbd {
+  display: inline-block; min-width: 1.7em; text-align: center; padding: .1em .4em; margin: 0 .12em .25em 0;
+  background: var(--buffer); border: 1px solid var(--line); border-bottom-width: 3px; border-radius: 5px; white-space: pre;
+}
+
+.app { display: grid; grid-template-columns: 290px minmax(0, 1fr); height: 100%; }
+
+/* rail */
+.rail { background: var(--panel); border-right: 1px solid var(--line); overflow-y: auto; padding: 20px 16px; display: flex; flex-direction: column; gap: 18px; }
+.brand { font-family: var(--cond); font-weight: 600; font-size: 26px; letter-spacing: .01em; line-height: 1.1; margin: 0; }
+.brand b { color: var(--accent); font-weight: 600; }
+.tagline { margin: 4px 0 0; color: var(--muted); font-size: 13px; }
+.tally { font-family: var(--mono); font-size: 13px; color: var(--muted); font-variant-numeric: tabular-nums; }
+.tally strong { color: var(--ink); font-weight: 600; }
+.meter { height: 6px; background: var(--line); border-radius: 3px; overflow: hidden; margin-top: 6px; }
+.meter i { display: block; height: 100%; background: var(--accent); width: 0; }
+.btn { background: var(--buffer); border: 1px solid var(--line); border-radius: 6px; padding: .45em .9em; }
+.btn:hover { border-color: var(--muted); }
+.btn.primary { background: var(--accent); border-color: var(--accent); color: var(--buffer); font-weight: 600; }
+.btn .sc { font-family: var(--mono); font-size: .8em; color: var(--muted); margin-left: .5em; }
+.btn.primary .sc { color: inherit; opacity: .8; }
+.mods { display: flex; flex-direction: column; gap: 2px; }
+.mod summary { display: flex; justify-content: space-between; gap: 8px; align-items: baseline; padding: 6px 8px; border-radius: 5px; cursor: pointer; list-style: none; font-family: var(--cond); font-weight: 600; font-size: 15px; letter-spacing: .02em; }
+.mod summary::-webkit-details-marker { display: none; }
+.mod summary:hover { background: var(--bg); }
+.mod-count { font-family: var(--mono); font-weight: 400; font-size: 12px; color: var(--muted); font-variant-numeric: tabular-nums; }
+.mod-count.full { color: var(--ok); }
+.mod ol { list-style: none; margin: 2px 0 8px; padding: 0 0 0 8px; border-left: 1px solid var(--line); margin-left: 12px; }
+.ch-link { display: flex; justify-content: space-between; gap: 8px; width: 100%; text-align: left; background: none; border: 0; padding: 4px 8px; border-radius: 4px; font-size: 13.5px; color: var(--muted); }
+.ch-link:hover { background: var(--bg); color: var(--ink); }
+.ch-link.cur { background: var(--accent-soft); color: var(--ink); font-weight: 500; }
+.ch-link.solved { color: var(--ink); }
+.stars { font-size: 12px; letter-spacing: 1px; color: var(--accent); white-space: nowrap; }
+.rail-foot { margin-top: auto; display: flex; flex-direction: column; gap: 8px; font-size: 13px; color: var(--muted); }
+.rail-foot label { display: flex; gap: 8px; align-items: center; cursor: pointer; }
+.linkish { background: none; border: 0; padding: 0; color: var(--muted); text-decoration: underline; font-size: 13px; text-align: left; }
+
+/* main */
+main { overflow-y: auto; padding-block: 24px 40px; padding-inline: clamp(16px, 3vw, 40px); }
+.col { max-width: 1060px; margin: 0 auto; display: flex; flex-direction: column; gap: 16px; }
+.eyebrow { font-family: var(--cond); font-weight: 600; font-size: 13px; letter-spacing: .09em; text-transform: uppercase; color: var(--accent); display: flex; gap: 12px; flex-wrap: wrap; }
+.eyebrow .pos { color: var(--muted); font-family: var(--mono); font-weight: 400; letter-spacing: 0; text-transform: none; }
+h1 { font-family: var(--cond); font-weight: 600; font-size: 30px; line-height: 1.15; margin: 2px 0 0; text-wrap: balance; }
+.goal { font-size: 17px; margin: 0; max-width: 65ch; }
+.best { font-family: var(--mono); font-size: 13px; color: var(--muted); }
+.goal .aside { color: var(--muted); font-size: 15px; }
+
+.work { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 16px; align-items: start; }
+.work.solo { grid-template-columns: minmax(0, 1fr); }
+.pane { min-width: 0; }
+.pane-label { font-family: var(--cond); font-weight: 600; font-size: 12px; letter-spacing: .09em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; display: flex; justify-content: space-between; }
+.buffer { border: 1px solid var(--line); border-radius: 6px; overflow: hidden; background: var(--buffer); }
+.buffer.focused { border-color: var(--accent); }
+.target { margin: 0; border: 1px dashed var(--line); border-radius: 6px; padding: 4px 0; background: var(--buffer); font-family: var(--mono); font-size: 15px; line-height: 1.55; overflow-x: auto; }
+.target div { padding: 0 12px; white-space: pre; min-height: 1.55em; border-left: 3px solid transparent; }
+.target div.diff { border-left-color: var(--accent); background: var(--accent-soft); }
+.target div.same { color: var(--muted); }
+
+.statusline { display: flex; align-items: stretch; font-family: var(--mono); font-size: 13px; border-top: 1px solid var(--line); background: var(--panel); min-height: 28px; }
+.mode { padding: 4px 12px; font-weight: 600; background: var(--line); color: var(--ink); white-space: nowrap; }
+.mode.insert { background: var(--ok); color: var(--buffer); }
+.mode.visual { background: var(--aim); color: var(--buffer); }
+.mode.replace { background: var(--bad); color: var(--buffer); }
+.rec { padding: 4px 10px; color: var(--bad); white-space: nowrap; }
+.keylog { flex: 1; min-width: 0; padding: 4px 10px; color: var(--muted); white-space: pre; overflow: hidden; direction: rtl; text-align: left; }
+.keylog span { direction: ltr; unicode-bidi: bidi-override; }
+.count { padding: 4px 12px; white-space: nowrap; font-variant-numeric: tabular-nums; }
+.count.over { color: var(--bad); }
+
+.actions { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.actions .spacer { flex: 1; }
+.note { border-left: 3px solid var(--aim); background: var(--aim-soft); padding: 10px 14px; border-radius: 0 6px 6px 0; max-width: 75ch; }
+.note p { margin: 0; }
+.note p + p { margin-top: 8px; }
+
+.result { border: 1px solid var(--ok); background: var(--ok-soft); border-radius: 8px; padding: 16px 20px; display: flex; flex-direction: column; gap: 10px; }
+.result h2 { font-family: var(--cond); font-size: 22px; margin: 0; display: flex; gap: 14px; align-items: baseline; flex-wrap: wrap; }
+.result .big-stars { color: var(--accent); letter-spacing: 3px; font-size: 22px; }
+.result dl { display: grid; grid-template-columns: max-content minmax(0, 1fr); gap: 6px 16px; margin: 0; }
+.result dt { font-family: var(--cond); font-weight: 600; font-size: 12px; letter-spacing: .09em; text-transform: uppercase; color: var(--muted); padding-top: .3em; }
+.result dd { margin: 0; min-width: 0; overflow-wrap: anywhere; }
+.result .why { max-width: 70ch; margin: 0; }
+
+.notes { border-top: 1px solid var(--line); padding-top: 12px; }
+.notes summary { cursor: pointer; font-family: var(--cond); font-weight: 600; letter-spacing: .02em; }
+.notes p { max-width: 70ch; color: var(--muted); margin: 10px 0; }
+.keytable { display: grid; grid-template-columns: max-content minmax(0, 1fr); gap: 4px 16px; margin: 0; }
+.keytable dt { font-family: var(--mono); font-size: 13.5px; color: var(--accent); white-space: pre; }
+.keytable dd { margin: 0; color: var(--ink); }
+
+.summary table { border-collapse: collapse; width: 100%; font-variant-numeric: tabular-nums; }
+.summary th { text-align: left; font-family: var(--cond); font-size: 12px; letter-spacing: .09em; text-transform: uppercase; color: var(--muted); }
+.summary th, .summary td { padding: 6px 12px 6px 0; border-bottom: 1px solid var(--line); }
+.summary td.num, .summary th.num { text-align: right; font-family: var(--mono); }
+
+/* editor skin */
+/* The bottom row is kept free, like Vim's command line, so : / and macro messages never cover text. */
+.CodeMirror { height: auto; padding-bottom: 30px; background: var(--buffer); color: var(--ink); font-family: var(--mono); font-size: 15px; line-height: 1.55; }
+.CodeMirror-lines { padding: 6px 0; }
+.CodeMirror-gutters { background: var(--buffer); border-right: 1px solid var(--line); }
+.CodeMirror-linenumber { color: var(--muted); min-width: 2.2em; }
+.CodeMirror-cursor { border-left: 2px solid var(--ink); }
+.cm-fat-cursor .CodeMirror-cursor { background: var(--cursor); }
+.cm-fat-cursor-mark { background: var(--cursor); animation: none; }
+.CodeMirror-selected, .CodeMirror-focused .CodeMirror-selected { background: var(--sel); }
+.CodeMirror-dialog { background: var(--panel); color: var(--ink); font-family: var(--mono); font-size: 14px; line-height: 21px; height: 30px; padding: 4px 12px; white-space: nowrap; }
+.CodeMirror-dialog-bottom { border-top: 1px solid var(--line); }
+.CodeMirror-dialog-top { border-bottom: 1px solid var(--line); }
+.CodeMirror-dialog input { font: inherit; color: inherit; background: transparent; border: 0; outline: 0; width: 24em; max-width: 80%; }
+.cm-searching { background: var(--accent-soft); }
+.cm-s-default .cm-tag, .cm-s-default .cm-bracket { color: var(--ok); }
+.cm-s-default .cm-attribute { color: var(--aim); }
+.cm-s-default .cm-string { color: var(--accent); }
+.aim { background: var(--aim-soft); outline: 2px solid var(--aim); border-radius: 2px; }
+.aim-line { background: var(--aim-soft); box-shadow: inset 3px 0 0 var(--aim); }
+
+@media (max-width: 860px) {
+  html, body { height: auto; }
+  .app { display: flex; flex-direction: column; height: auto; }
+  main { order: 1; overflow: visible; }
+  .rail { order: 2; border-right: 0; border-top: 1px solid var(--line); overflow: visible; }
+  .work { grid-template-columns: minmax(0, 1fr); }
+  h1 { font-size: 25px; }
+}
+@media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
+</style>
+
+<div class="app">
+  <aside class="rail">
+    <div>
+      <p class="brand">Vim <b>Reps</b></p>
+      <p class="tagline">Short editing drills, scored in keystrokes.</p>
+    </div>
+    <div>
+      <div class="tally" id="tally"></div>
+      <div class="meter"><i id="meter"></i></div>
+    </div>
+    <button class="btn primary" id="btn-drill" type="button">Start a drill</button>
+    <nav class="mods" id="mods" aria-label="Lessons"></nav>
+    <div class="rail-foot">
+      <label><input type="checkbox" id="opt-rel"> Relative line numbers</label>
+      <button class="linkish" id="btn-wipe" type="button">Reset progress</button>
+    </div>
+  </aside>
+
+  <main>
+    <div class="col" id="play">
+      <div>
+        <div class="eyebrow"><span id="eyebrow"></span><span class="pos" id="pos"></span></div>
+        <h1 id="title"></h1>
+      </div>
+      <p class="goal" id="goal"></p>
+      <div class="work" id="work">
+        <section class="pane">
+          <div class="pane-label"><span>Your buffer</span><span id="best" class="best"></span></div>
+          <div class="buffer" id="buffer">
+            <div id="editor"></div>
+            <div class="statusline">
+              <span class="mode" id="mode">NORMAL</span>
+              <span class="rec" id="rec" hidden></span>
+              <span class="keylog"><span id="keylog"></span></span>
+              <span class="count" id="count"></span>
+            </div>
+          </div>
+        </section>
+        <section class="pane" id="target-pane">
+          <div class="pane-label"><span>Target</span></div>
+          <div class="target" id="target"></div>
+        </section>
+      </div>
+      <div class="actions">
+        <button class="btn" id="btn-reset" type="button">Reset<span class="sc">Alt+R</span></button>
+        <button class="btn" id="btn-hint" type="button">Hint<span class="sc">Alt+H</span></button>
+        <button class="btn" id="btn-solve" type="button">Show solution</button>
+        <span class="spacer"></span>
+        <button class="btn" id="btn-prev" type="button">Previous<span class="sc">Alt+P</span></button>
+        <button class="btn" id="btn-next" type="button">Skip<span class="sc">Alt+N</span></button>
+      </div>
+      <div class="note" id="note" hidden></div>
+      <section class="result" id="result" hidden></section>
+      <details class="notes" id="notes">
+        <summary id="notes-title"></summary>
+        <p id="notes-intro"></p>
+        <dl class="keytable" id="notes-keys"></dl>
+      </details>
+    </div>
+    <div class="col summary" id="summary" hidden></div>
+  </main>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/addon/dialog/dialog.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/addon/search/searchcursor.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/addon/edit/matchbrackets.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/xml/xml.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/addon/fold/xml-fold.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/keymap/vim.min.js"></script>
+
+<script>
+/*DATA-START*/
+// In a buffer, ▸ sits before the character the cursor starts on and ◎ before the
+// character a motion drill must land on. `out` is the text an editing drill must produce.
+// `keys` is the reference solution in Vim notation; its length is the par.
+const MODULES = [
+{
+  id: 'motions', name: 'Get there faster',
+  intro: 'Most wasted keystrokes are movement. Before you reach for `w` or `l` five times, look for a character, a count, a bracket or a search that gets you there in one hop.',
+  keys: [
+    ['f{c}  F{c}', 'jump to the next / previous {c} on the line'],
+    ['t{c}  T{c}', 'same, but stop one short of it'],
+    [';  ,', 'repeat the last f/t/F/T, forward / backward'],
+    ['w b e  W B E', 'word hops; the capitals only stop at whitespace'],
+    ['%', 'jump to the matching bracket'],
+    ['{  }', 'previous / next blank line'],
+    ['{n}G  gg  G', 'line n, first line, last line'],
+    ['/text  n  N', 'search forward, next match, previous match'],
+    ['*  #', 'next / previous occurrence of the word under the cursor'],
+  ],
+  items: [
+    { id: 'mo-f', t: 'Jump to a character', goal: 'Land on the `*`.',
+      buf: `
+▸const total = price ◎* quantity + shipping_cost;`,
+      keys: 'f*', hint: '`f{char}` jumps straight to the next {char} on the line.',
+      why: 'Pick a target character that is rare on the line and `f` gets you there in two keys, however far away it is.' },
+    { id: 'mo-count-f', t: 'Count the hops', goal: 'Land on the opening paren of `join(`.',
+      buf: `
+▸items.filter(x => x.active).map(x => x.name).join◎(", ")`,
+      keys: '3f(', hint: 'It is the third `(` on the line. `f` takes a count.',
+      why: '`3f(` beats `f(;;` by a key. When counting is awkward, `f(` followed by `;` is fine too.' },
+    { id: 'mo-F', t: 'Backwards', goal: 'Land on the capital `A` of `isActive`.',
+      buf: `
+if (user.isAdmin && user.is◎Active && !user.isBanned▸) {`,
+      keys: 'FA', hint: '`F{char}` searches backward along the line.',
+      why: 'Capital letters and punctuation make good `f`/`F` targets because there are few of them.' },
+    { id: 'mo-W', t: 'Big words', goal: 'Land on the opening quote of `"localhost"`.',
+      buf: `
+▸self.config.database.host = env.get("DB_HOST", ◎"localhost")`,
+      keys: '3W', hint: '`W` only stops after whitespace, so punctuation does not slow it down.',
+      why: '`w` would stop at every dot, paren and quote. `W` treats anything between spaces as one word.' },
+    { id: 'mo-pct', t: 'Matching bracket', goal: 'Land on the brace that closes `render`.',
+      buf: `
+▸function render(items) {
+  return items.map((item) => {
+    return wrap(item, { deep: true });
+  });
+◎}
+
+function other() {
+  return 1;
+}`,
+      keys: '$%', hint: 'Get onto the opening `{` first, then use `%`.',
+      why: '`%` works on whatever bracket is under the cursor. It is also a motion, so `d%` and `y%` work.' },
+    { id: 'mo-para', t: 'Paragraph hops', goal: 'Land on the blank line just above `# Run`.',
+      buf: `
+▸# Install
+Run the installer.
+Accept the defaults.
+
+# Configure
+Edit the config file.
+Set your editor.
+◎
+# Run
+Start the server.`,
+      keys: '2}', hint: '`}` jumps to the next blank line.',
+      why: '`{` and `}` are the quickest way to move through code that is separated by blank lines.' },
+    { id: 'mo-G', t: 'Go to a line', goal: 'Land on line 9.',
+      buf: `
+▸[package]
+name = "reps"
+version = "0.3.1"
+edition = "2021"
+
+[dependencies]
+serde = "1.0"
+tokio = "1.38"
+◎anyhow = "1.0"
+clap = "4.5"
+
+[profile.release]
+opt-level = 3`,
+      keys: '9G', hint: 'A count before `G` is a line number.',
+      why: '`9G` (or `:9`) is exact. With relative numbers on, `8j` is just as good.' },
+    { id: 'mo-search', t: 'Search is a motion', goal: 'Land on the timeout value, `30`.',
+      buf: `
+▸server:
+  host: 0.0.0.0
+  port: 8080
+  workers: 4
+logging:
+  level: info
+  file: /var/log/app.log
+cache:
+  backend: redis
+  timeout: ◎30
+  size: 512`,
+      keys: '/30<CR>', hint: 'Search for the shortest text that is unique: `/30`.',
+      why: 'When the target is several lines away and mid-line, a two or three character search usually beats any combination of `j` and `w`.' },
+    { id: 'mo-star', t: 'Next use of this word', goal: 'Jump to where `retries` is used next.',
+      buf: `
+let ▸retries = 3;
+while (true) {
+  try { return fetch(url); }
+  catch (e) {
+    if (--◎retries === 0) throw e;
+  }
+}`,
+      keys: '*', hint: '`*` searches for the word under the cursor.',
+      why: '`*` also sets the search pattern, so `n`, `N` and `cgn` keep working on the same word afterwards.' },
+  ],
+},
+{
+  id: 'ops', name: 'Operator + motion',
+  intro: 'An operator (`d`, `c`, `y`, `>`, `gU`) followed by any motion acts on the text the motion covers. Every motion you learn multiplies with every operator you know.',
+  keys: [
+    ['d{motion}', 'delete'],
+    ['c{motion}', 'delete, then insert'],
+    ['y{motion}', 'yank (copy)'],
+    ['D  C', 'delete / change to the end of the line'],
+    ['dt)  ct;', 'up to, but not including, a character'],
+    ['dgg  dG', 'to the top / bottom of the file'],
+    ['gU  gu  g~', 'uppercase / lowercase / toggle case'],
+    ['>{motion}  <{motion}', 'indent / dedent'],
+  ],
+  items: [
+    { id: 'op-dt', t: 'Delete up to a character', goal: 'Drop the email and token arguments.',
+      buf: `
+logger.info(▸user.name, user.email, user.token)`,
+      out: `
+logger.info(user.name)`,
+      keys: 'f,dt)', hint: 'Move to the first comma, then delete up to (not including) the `)`.',
+      why: '`t` stops one short of the character, which is exactly what you want when the delimiter has to stay.' },
+    { id: 'op-C', t: 'Change the rest of the line', goal: 'Make it read `retries = 5`.',
+      buf: `
+▸    retries = 3 if fast else 10`,
+      out: `
+    retries = 5`,
+      keys: 'f3C5<Esc>', hint: '`C` changes from the cursor to the end of the line.',
+      why: '`C` is `c$`. Likewise `D` is `d$`.' },
+    { id: 'op-ct', t: 'Change up to a character', goal: 'Replace all four values with a single `0`.',
+      buf: `
+padding: ▸12px 24px 12px 24px;`,
+      out: `
+padding: 0;`,
+      keys: 'ct;0<Esc>', hint: '`ct;` changes everything up to the semicolon.',
+      why: 'One change, and it is repeatable with `.` on the next declaration.' },
+    { id: 'op-dgg', t: 'Delete to the top', goal: 'Delete this line and everything above it.',
+      buf: `
+# scratch notes
+# delete everything
+# from here up
+▸# to the top
+import sys
+print(sys.argv)`,
+      out: `
+import sys
+print(sys.argv)`,
+      keys: 'dgg', hint: '`gg` is a motion like any other.',
+      why: 'Motions that move by line make the operator work on whole lines. `dG` does the same downward.' },
+    { id: 'op-dpct', t: 'Delete a bracketed aside', goal: 'Remove the parenthetical and the extra space.',
+      buf: `
+The setup guide ▸(which nobody reads, honestly) explains everything.`,
+      out: `
+The setup guide explains everything.`,
+      keys: 'd%x', hint: 'You are on the `(`. `%` is a motion.',
+      why: '`d%` deletes through the matching bracket, however much is inside or how many lines it spans.' },
+    { id: 'op-gU', t: 'Uppercase a word', goal: 'Turn the name into a constant: `MAX_RETRIES`.',
+      buf: `
+const ▸max_retries = 5;`,
+      out: `
+const MAX_RETRIES = 5;`,
+      keys: 'gUw', hint: '`gU` is an operator. Give it a motion.',
+      why: '`gU`, `gu` and `g~` take any motion or text object, so `gUiw` works from the middle of a word.' },
+    { id: 'op-shift', t: 'Indent a few lines', goal: 'Indent the three `print` lines under the `if`.',
+      buf: `
+if ready:
+▸print("a")
+print("b")
+print("c")
+done()`,
+      out: `
+if ready:
+    print("a")
+    print("b")
+    print("c")
+done()`,
+      keys: '>2j', hint: '`>` is an operator too. `2j` covers this line and the two below.',
+      why: 'No need for visual mode: `>2j` indents three lines. `>ip` or `>}` covers a whole paragraph.' },
+  ],
+},
+{
+  id: 'textobj', name: 'Text objects',
+  intro: 'Text objects select a thing (a word, a string, a bracket pair, a tag, a paragraph) from anywhere inside it. `i` means inside, `a` means around, including the delimiters or the trailing space.',
+  keys: [
+    ['iw  aw', 'word / word plus its space'],
+    ['i"  a"  i\'  a\'', 'inside / around quotes'],
+    ['i(  i[  i{  i<', 'inside brackets (also ib and iB)'],
+    ['a(  a[  a{', 'the brackets as well'],
+    ['it  at', 'inside / around an HTML tag pair'],
+    ['ip  ap', 'paragraph / paragraph plus blank line'],
+  ],
+  items: [
+    { id: 'to-ciw', t: 'Change a word from the middle', goal: 'Rename the argument `endpoint` to `url`.',
+      buf: `
+let result = fetchData(endp▸oint, options);`,
+      out: `
+let result = fetchData(url, options);`,
+      keys: 'ciwurl<Esc>', hint: '`ciw` changes the whole word, wherever the cursor is inside it.',
+      why: '`cw` would only change from the cursor onward. `ciw` does not care where in the word you are.' },
+    { id: 'to-ciq', t: 'Change inside quotes', goal: 'Shorten the greeting to `Hi`.',
+      buf: `
+▸const greeting = "Hello, cruel world";`,
+      out: `
+const greeting = "Hi";`,
+      keys: 'ci"Hi<Esc>', hint: 'You do not have to move first. `ci"` finds the next string on the line.',
+      why: 'Quote objects look ahead on the line, so `ci"` works from the start of the line.' },
+    { id: 'to-dib', t: 'Empty the parentheses', goal: 'Remove all the arguments.',
+      buf: `
+connect(host, po▸rt, { retries: 3 })`,
+      out: `
+connect()`,
+      keys: 'di(', hint: '`di(` deletes everything inside the surrounding parentheses.',
+      why: '`dib` is the same thing and avoids the shift key.' },
+    { id: 'to-daw', t: 'Delete a word cleanly', goal: 'Remove the word `annoying`.',
+      buf: `
+This sentence has an an▸noying extra word.`,
+      out: `
+This sentence has an extra word.`,
+      keys: 'daw', hint: '`aw` includes the space next to the word.',
+      why: '`diw` would leave two spaces behind. `daw` takes one of them with it.' },
+    { id: 'to-cit', t: 'Change inside a tag', goal: 'Change the heading text to `News`.', mode: 'xml',
+      buf: `
+<h1 class="title">Old bor▸ing heading</h1>`,
+      out: `
+<h1 class="title">News</h1>`,
+      keys: 'citNews<Esc>', hint: '`it` is the text between an opening and closing tag.',
+      why: '`cit` saves you from hunting for the `>` and `<`.' },
+    { id: 'to-dap', t: 'Delete a paragraph', goal: 'Remove the `unused` function and the blank line after it.',
+      buf: `
+import os
+
+▸def unused():
+    return None
+
+def main():
+    run()`,
+      out: `
+import os
+
+def main():
+    run()`,
+      keys: 'dap', hint: '`ap` is the paragraph plus the blank line that follows.',
+      why: 'Works from any line of the block. `yap` and `>ip` are just as handy.' },
+    { id: 'to-cibr', t: 'Change inside brackets', goal: 'Replace the index expression with `i`.',
+      buf: `
+matrix[row * width + c▸ol] = 0;`,
+      out: `
+matrix[i] = 0;`,
+      keys: 'ci[i<Esc>', hint: '`ci[` changes everything between the square brackets.',
+      why: 'The same pattern works for `ci{`, `ci(` and `ci<`.' },
+  ],
+},
+{
+  id: 'dot', name: 'The dot command',
+  intro: '`.` repeats your last change. The skill is shaping each edit so that one keystroke moves you to the next spot and one more repeats the change.',
+  keys: [
+    ['.', 'repeat the last change'],
+    ['j.', 'next line, same change'],
+    [';.', 'next f/t match, same change'],
+    ['n.', 'next search match, same change'],
+    ['A text<Esc>', 'an append that repeats anywhere on a line'],
+  ],
+  items: [
+    { id: 'dot-A', t: 'Append and repeat', goal: 'Add a semicolon to the end of every line.',
+      buf: `
+▸const a = 1
+const b = 2
+const c = 3`,
+      out: `
+const a = 1;
+const b = 2;
+const c = 3;`,
+      keys: 'A;<Esc>j.j.', hint: 'Make the change once with `A`, then `j.` for each remaining line.',
+      why: '`A` carries its own movement to the end of the line, so the repeat works wherever `j` lands.' },
+    { id: 'dot-dd', t: 'Every other line', goal: 'Delete all three `drop` lines.',
+      buf: `
+keep 1
+▸drop
+keep 2
+drop
+keep 3
+drop`,
+      out: `
+keep 1
+keep 2
+keep 3`,
+      keys: 'ddj.j.', hint: 'After `dd` the cursor is on the next line. One `j` reaches the next victim.',
+      why: 'One key to move and one to repeat is the ideal dot rhythm.' },
+    { id: 'dot-ciw', t: 'Make it repeatable', goal: 'Change every `var` to `let`.',
+      buf: `
+▸var a = 1;
+var b = 2;
+var c = 3;`,
+      out: `
+let a = 1;
+let b = 2;
+let c = 3;`,
+      keys: 'ciwlet<Esc>j.j.', hint: 'After the first change your cursor is mid-word. Use a change that works from there.',
+      why: '`cw` only repeats correctly from the start of the word. `ciw` repeats from anywhere inside it, so `j.` is enough.' },
+    { id: 'dot-semi', t: 'Find, change, repeat', goal: 'Put a space on both sides of every `+`.',
+      buf: `
+▸var foo = "method("+argument1+","+argument2+")";`,
+      out: `
+var foo = "method(" + argument1 + "," + argument2 + ")";`,
+      keys: 'f+s<Space>+<Space><Esc>;.;.;.', hint: 'Jump with `f+`, substitute with `s`, then alternate `;` and `.`.',
+      why: '`;` repeats the jump and `.` repeats the change. The pair handles any number of matches on a line.' },
+    { id: 'dot-star', t: 'Rename with n and dot', goal: 'Rename `tmp` to `data` everywhere.',
+      buf: `
+let ▸tmp = load();
+validate(tmp);
+save(tmp, path);`,
+      out: `
+let data = load();
+validate(data);
+save(data, path);`,
+      keys: '*cwdata<Esc>n.n.', hint: '`*` sets the search to this word and jumps to the next one. Change it, then `n.`.',
+      why: 'Unlike `:%s`, you see each match before you change it and can skip one with an extra `n`.' },
+  ],
+},
+{
+  id: 'quick', name: 'Small fixes',
+  intro: 'Short commands for the edits you make dozens of times a day: swapping, joining, duplicating, bumping a number.',
+  keys: [
+    ['xp', 'swap two characters'],
+    ['ddp', 'swap two lines'],
+    ['yyp', 'duplicate a line'],
+    ['J', 'join the next line onto this one'],
+    ['Ctrl-a  Ctrl-x', 'add to / subtract from the next number on the line'],
+    ['o  O', 'open a line below / above'],
+    ['S', 'retype the line, keeping its indent'],
+  ],
+  items: [
+    { id: 'qk-xp', t: 'Swap two letters', goal: 'Fix the typo in `retrun`.',
+      buf: `
+▸retrun value;`,
+      out: `
+return value;`,
+      keys: 'frxp', hint: 'Go to the second `r`, then cut it and paste it after the next character.',
+      why: '`xp` is just delete followed by put. It reads as "transpose".' },
+    { id: 'qk-ddp', t: 'Swap two lines', goal: 'Put the steps in order.',
+      buf: `
+step one
+▸step three
+step two`,
+      out: `
+step one
+step two
+step three`,
+      keys: 'ddp', hint: 'Delete the line, then put it back below the next one.',
+      why: '`ddp` moves a line down one. `ddkP` moves it up.' },
+    { id: 'qk-J', t: 'Join lines', goal: 'Collapse the object onto one line.',
+      buf: `
+▸const point = {
+  x: 1,
+  y: 2
+};`,
+      out: `
+const point = { x: 1, y: 2 };`,
+      keys: '4J', hint: '`J` takes a count: the number of lines to join.',
+      why: '`J` removes the indentation and leaves a single space at each join.' },
+    { id: 'qk-ca', t: 'Bump a number', goal: 'Raise the z-index to 100.',
+      buf: `
+▸z-index: 90;`,
+      out: `
+z-index: 100;`,
+      keys: '10<C-a>', hint: '`Ctrl-a` adds to the next number on the line. It takes a count.',
+      why: 'You do not need to be on the number. `Ctrl-x` subtracts.' },
+    { id: 'qk-O', t: 'Open a line above', goal: 'Define `pi = 3.14` on a new line above the `return`.',
+      buf: `
+def area(r):
+    r = abs(r)
+    ▸return pi * r * r`,
+      out: `
+def area(r):
+    r = abs(r)
+    pi = 3.14
+    return pi * r * r`,
+      keys: 'Opi = 3.14<Esc>', hint: '`O` opens a line above and matches the indent.',
+      why: '`O` replaces the clumsy `ko` or `0i...<CR>` dance.' },
+    { id: 'qk-S', t: 'Retype a line', goal: 'Replace the whole statement with `pass`.',
+      buf: `
+▸x = some_really(long, expression) + that_is_wrong`,
+      out: `
+pass`,
+      keys: 'Spass<Esc>', hint: '`S` clears the line and drops you into insert mode.',
+      why: '`S` (or `cc`) is quicker than `0C` and far quicker than `ddO`. In Neovim it also keeps the indent of an indented line.' },
+    { id: 'qk-yyp', t: 'Duplicate and tweak', goal: 'Add a matching `padding-right` line below.',
+      buf: `
+▸padding-left: 4px;`,
+      out: `
+padding-left: 4px;
+padding-right: 4px;`,
+      keys: 'yypflcwright<Esc>', hint: 'Duplicate with `yyp`, then change one word.',
+      why: 'Copying a line and editing the difference is nearly always faster than typing it again.' },
+  ],
+},
+{
+  id: 'visual', name: 'Visual and block mode',
+  intro: 'Visual mode is for when the region is easier to see than to describe. Block mode (`Ctrl-v`) edits a column across several lines at once.',
+  keys: [
+    ['v  V  Ctrl-v', 'characterwise, linewise, blockwise'],
+    ['Ctrl-v … I text<Esc>', 'insert before the block on every line'],
+    ['Ctrl-v … $A text<Esc>', 'append at the end of every line'],
+    ['Ctrl-v … c text<Esc>', 'replace the block on every line'],
+    ['r{c}', 'replace every selected character with {c}'],
+    ['vip', 'select the paragraph, then run a command on it'],
+    ['gv', 'reselect the last selection'],
+  ],
+  items: [
+    { id: 'vi-blockI', t: 'Comment out a block', goal: 'Comment out the first three calls with `// `.',
+      buf: `
+▸alpha()
+beta()
+gamma()
+delta()`,
+      out: `
+// alpha()
+// beta()
+// gamma()
+delta()`,
+      keys: '<C-v>jjI//<Space><Esc>', hint: 'Select a column with `Ctrl-v` and `jj`, then `I` to insert on every line.',
+      why: 'The text appears on the other lines when you press Esc.' },
+    { id: 'vi-blockd', t: 'Delete a column', goal: 'Strip the numbering from the list.',
+      buf: `
+▸1. apples
+2. pears
+3. plums`,
+      out: `
+apples
+pears
+plums`,
+      keys: '<C-v>jjlld', hint: 'Make a block three columns wide and three lines tall, then `d`.',
+      why: 'Block mode treats text as a grid, which suits aligned prefixes and table columns.' },
+    { id: 'vi-blockA', t: 'Append to ragged lines', goal: 'Add a trailing comma to every line.',
+      buf: `
+▸"red"
+"green"
+"blue"`,
+      out: `
+"red",
+"green",
+"blue",`,
+      keys: '<C-v>jj$A,<Esc>', hint: 'In block mode, `$` extends every line to its own end.',
+      why: 'Without `$` the block would be a rectangle and the comma would land mid-word on longer lines.' },
+    { id: 'vi-blockc', t: 'Change a column', goal: 'Rename the `old_` prefix to `new_` on all three lines.',
+      buf: `
+▸old_name = 1
+old_size = 2
+old_mode = 3`,
+      out: `
+new_name = 1
+new_size = 2
+new_mode = 3`,
+      keys: '<C-v>jjllcnew<Esc>', hint: 'Select the three-letter column, then `c`.',
+      why: 'Block change is the shortest way to rewrite an aligned prefix.' },
+    { id: 'vi-underline', t: 'Underline a heading', goal: 'Add a row of `=` exactly as long as the heading.',
+      buf: `
+▸Release notes`,
+      out: `
+Release notes
+=============`,
+      keys: 'yypVr=', hint: 'Duplicate the line, select the copy, and replace every character.',
+      why: '`r` in visual mode replaces each selected character, so the underline always matches the length.' },
+    { id: 'vi-sort', t: 'Sort a paragraph', goal: 'Sort the imports alphabetically.',
+      buf: `
+import zlib
+▸import os
+import json
+
+print("ready")`,
+      out: `
+import json
+import os
+import zlib
+
+print("ready")`,
+      keys: 'vip:sort<CR>', hint: 'Select the paragraph with `vip`, then press `:` and type `sort`.',
+      why: 'Pressing `:` in visual mode fills in the range for you, so any Ex command can run on the selection.' },
+  ],
+},
+{
+  id: 'reg', name: 'Yank, put and registers',
+  intro: 'Every delete overwrites what you last yanked, unless you know where things are kept. `"0` always holds your last yank. Pasting over a selection swaps the selection into the register.',
+  keys: [
+    ['p  P', 'put after / before the cursor'],
+    ['{n}p', 'put n copies'],
+    ['yiw  yi(', 'yank a text object'],
+    ['viwp', 'replace a word with what you yanked'],
+    ['"0p', 'put the last yank, ignoring deletes since'],
+    ['"ay  "ap', 'yank into / put from register a'],
+    ['"_d', 'delete without touching any register'],
+  ],
+  items: [
+    { id: 'rg-count-p', t: 'Paste several copies', goal: 'Turn one task line into four.',
+      buf: `
+▸- [ ] task`,
+      out: `
+- [ ] task
+- [ ] task
+- [ ] task
+- [ ] task`,
+      keys: 'yy3p', hint: '`p` takes a count.',
+      why: 'Counts work on put as well as on motions.' },
+    { id: 'rg-yi', t: 'Yank the arguments', goal: 'Give `clip` the same arguments as `draw`.',
+      buf: `
+draw(▸x * scale + offset, y)
+clip()`,
+      out: `
+draw(x * scale + offset, y)
+clip(x * scale + offset, y)`,
+      keys: 'yi(jP', hint: 'Yank inside the parentheses, move down, and put before the `)`.',
+      why: 'Yanking a text object leaves the cursor at its start, which here lines up with the `)` below.' },
+    { id: 'rg-viwp', t: 'Replace with a yank', goal: 'Replace the placeholder `WIDTH` with the real width.',
+      buf: `
+width = ▸1280
+height = 720
+resolution = (WIDTH, 720)`,
+      out: `
+width = 1280
+height = 720
+resolution = (1280, 720)`,
+      keys: 'yiw2jfWviwp', hint: 'Yank the number, go to `WIDTH`, select it with `viw` and paste over it.',
+      why: 'Pasting over a selection replaces it in one step. No deleting first.' },
+    { id: 'rg-zero', t: 'The yank register', goal: 'Replace both `amt` with `total_price`.',
+      buf: `
+▸total_price = compute()
+show(amt)
+log(amt)`,
+      out: `
+total_price = compute()
+show(total_price)
+log(total_price)`,
+      keys: 'yiwjfaviwpjbviw"0p', hint: 'After the first paste the default register holds `amt`. Your yank is still in `"0`.',
+      why: 'Pasting over a selection puts the replaced text in the default register. `"0` still has the yank. In Neovim, `P` in visual mode also leaves the register alone.' },
+    { id: 'rg-swap', t: 'Swap two arguments', goal: 'Swap the arguments.',
+      buf: `
+swap(▸first_arg, second_arg)`,
+      out: `
+swap(second_arg, first_arg)`,
+      keys: 'dwwviwpF(p', hint: 'Delete the first word, paste it over the second, then paste what that displaced.',
+      why: 'Visual paste swaps: the word you replace lands in the register, ready to be put where the first one was.' },
+  ],
+},
+{
+  id: 'sub', name: 'Search and replace',
+  intro: 'Ex commands act on many lines at once. `:s` substitutes, `:g` runs a command on every matching line, and `cgn` turns a search into a change you can repeat with dot.',
+  keys: [
+    [':s/a/b/g', 'replace every a with b on this line'],
+    [':%s/a/b/g', 'the same, on every line'],
+    [':%s/a/b/gc', 'ask before each replacement'],
+    [':g/pat/d', 'delete every line matching pat'],
+    [':v/pat/d', 'delete every line that does not match'],
+    ['cgn', 'change the next search match; repeat with .'],
+  ],
+  items: [
+    { id: 'sb-line', t: 'Substitute on one line', goal: 'Change every dash to an underscore.',
+      buf: `
+▸data-user-profile-image-url-large`,
+      out: `
+data_user_profile_image_url_large`,
+      keys: ':s/-/_/g<CR>', hint: '`:s/old/new/g` works on the current line. The `g` means every match, not just the first.',
+      why: 'With five matches, `:s` beats `f-r_` plus four rounds of `;.`.' },
+    { id: 'sb-all', t: 'Substitute everywhere', goal: 'Change the spelling `gray` to `grey` throughout.',
+      buf: `
+▸color: gray; border-color: gray;
+background: gray;`,
+      out: `
+color: grey; border-color: grey;
+background: grey;`,
+      keys: ':%s/gray/grey/g<CR>', hint: '`%` is the range "every line".',
+      why: 'The pattern only has to be long enough to be unambiguous. `:%s/ay/ey/g` would do here.' },
+    { id: 'sb-global', t: 'Delete matching lines', goal: 'Delete every line that prints a DEBUG message.',
+      buf: `
+▸init()
+print("DEBUG boot")
+load_config()
+connect()
+print("DEBUG connected")
+print("DEBUG retry=0")
+run()
+flush()
+print("DEBUG flushed")
+stop()
+print("DEBUG bye")`,
+      out: `
+init()
+load_config()
+connect()
+run()
+flush()
+stop()`,
+      keys: ':g/DEBUG/d<CR>', hint: '`:g/pattern/command` runs the command on each matching line.',
+      why: '`:g` pairs with any Ex command. `:g/pat/normal ...` is not available here but is worth knowing in Neovim.' },
+    { id: 'sb-cgn', t: 'Selective rename', goal: 'Rename the variable `count` to `total`, but leave the string label alone.',
+      buf: `
+▸count = 0
+count += step
+print("count")
+return count`,
+      out: `
+total = 0
+total += step
+print("count")
+return total`,
+      keys: '*cgntotal<Esc>nn.n.', hint: '`*` sets the search. `cgn` changes the next match. Use `n` to step past the one you want to keep.',
+      why: '`cgn` makes "change the next match" a single repeatable action, so `.` both finds and changes.' },
+  ],
+},
+{
+  id: 'macro', name: 'Macros',
+  intro: 'When a change needs several steps, record it once with `q{register}` and replay it. Start a macro by putting the cursor somewhere predictable and end it by moving to the next place it should run.',
+  keys: [
+    ['qa … q', 'record into register a'],
+    ['@a', 'replay register a'],
+    ['@@', 'replay the last macro again'],
+    ['{n}@a', 'replay n times'],
+    ['0  ^', 'start with these so the macro works from any column'],
+    ['j', 'end with this so the next replay starts on the next line'],
+  ],
+  items: [
+    { id: 'mc-inc', t: 'Generate a sequence', goal: 'Extend the list to `item 5`.',
+      buf: `
+▸item 1`,
+      out: `
+item 1
+item 2
+item 3
+item 4
+item 5`,
+      keys: 'qayyp<C-a>q3@a', hint: 'Record: duplicate the line, then `Ctrl-a`. Replay three times.',
+      why: 'Duplicate plus increment is the standard way to build numbered lists and test fixtures.' },
+    { id: 'mc-kv', t: 'Reformat each line', goal: 'Convert each `key=value` to `key: "value",`.',
+      buf: `
+▸name=vim
+mode=normal
+theme=dark`,
+      out: `
+name: "vim",
+mode: "normal",
+theme: "dark",`,
+      keys: 'qa0f=s:<Space>"<Esc>A",<Esc>jq2@a', hint: 'Record on the first line. Begin with `0` and end with `j` so it replays cleanly.',
+      why: 'Without the leading `0` the replay would start at the end of the next line and `f=` would find nothing.' },
+    { id: 'mc-names', t: 'Reorder each line', goal: 'Rewrite each name as `First Last`.',
+      buf: `
+▸Lovelace, Ada
+Hopper, Grace
+Liskov, Barbara`,
+      out: `
+Ada Lovelace
+Grace Hopper
+Barbara Liskov`,
+      keys: 'qa0dWA<Space><Esc>pF,Djq2@a', hint: 'Cut the surname with `dW`, append a space, paste, then trim the leftover comma.',
+      why: 'Macros handle changes that vary in length from line to line, where block mode cannot.' },
+  ],
+},
+{
+  id: 'combo', name: 'Putting it together',
+  intro: 'Longer edits that mix several techniques. There is more than one good route, and beating par is possible.',
+  keys: [
+    ['ci( … O … p', 'extract an expression into a variable'],
+    ['Ctrl-v … I, gv$A', 'wrap every line, front and back'],
+    ['{n}J', 'join n lines into one'],
+  ],
+  items: [
+    { id: 'cb-wrap', t: 'Wrap in a call', goal: 'Wrap the returned expression in `String(...)`.',
+      buf: `
+return ▸user.name.trim();`,
+      out: `
+return String(user.name.trim());`,
+      keys: 'iString(<Esc>f;i)<Esc>', hint: 'Two small inserts: one here, one just before the semicolon.',
+      why: 'Plain inserts are fine when the motions between them are cheap.' },
+    { id: 'cb-extract', t: 'Extract a variable', goal: 'Pull the argument out into a variable `x` on the line above.',
+      buf: `
+▸print(compute(a, b) * 2)`,
+      out: `
+x = compute(a, b) * 2
+print(x)`,
+      keys: 'f(ci(x<Esc>Ox<Space>=<Space><Esc>p', hint: 'Changing inside the parentheses also saves the old contents in the register.',
+      why: 'A change is a delete, so the expression is ready to paste after you type the new name.' },
+    { id: 'cb-array', t: 'Lines to an array', goal: 'Turn the three lines into one array literal.',
+      buf: `
+▸red
+green
+blue`,
+      out: `
+["red", "green", "blue"]`,
+      keys: '<C-v>jjI"<Esc>gv$A",<Esc>3J$r]I[<Esc>', hint: 'Quote the front with a block insert, reselect with `gv` to append `",`, then join.',
+      why: '`gv` brings the block back for the second edit. The trailing comma becomes the closing bracket with `r]`.' },
+  ],
+},
+];
+/*DATA-END*/
+</script>
+
+<script>
+(function () {
+  'use strict';
+  const Vim = CodeMirror.Vim;
+  const $ = id => document.getElementById(id);
+  const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+  const fmt = s => esc(s).replace(/`([^`]+)`/g, '<code>$1</code>');
+  const tokenize = keys => keys.match(/<(?:Esc|CR|Space|Tab|BS|C-.)>|[\s\S]/g) || [];
+  const KEY_LABEL = { '<Esc>': 'Esc', '<CR>': '⏎', '<Space>': '␣', '<Tab>': 'Tab', '<BS>': 'BS' };
+  const keyLabel = k => KEY_LABEL[k] || (k.length > 1 ? k.slice(1, -1) : k);
+  const kbds = toks => toks.map(k => '<kbd>' + esc(keyLabel(k)) + '</kbd>').join('');
+  const starStr = n => '★'.repeat(n) + '☆'.repeat(3 - n);
+
+  function parseBuf(src) {
+    src = src.replace(/^\n/, '');
+    let line = 0, col = 0, text = '', at = [0, 0], to = null;
+    for (const c of src) {
+      if (c === '▸') { at = [line, col]; continue; }
+      if (c === '◎') { to = [line, col]; continue; }
+      text += c;
+      if (c === '\n') { line++; col = 0; } else col++;
+    }
+    return { text, at, to };
+  }
+
+  const ALL = [];
+  MODULES.forEach(m => m.items.forEach(c => {
+    const b = parseBuf(c.buf);
+    c.mod = m; c.start = b.text; c.at = b.at; c.to = b.to;
+    c.target = c.out == null ? null : c.out.replace(/^\n/, '');
+    c.tokens = tokenize(c.keys); c.par = c.tokens.length;
+    ALL.push(c);
+  }));
+  const BY_ID = Object.fromEntries(ALL.map(c => [c.id, c]));
+
+  /* ---------- saved progress (this browser only) ---------- */
+  const STORE_KEY = 'vimreps.v1';
+  let store = { done: {}, rel: false, last: null };
+  try { Object.assign(store, JSON.parse(localStorage.getItem(STORE_KEY) || '{}')); } catch (e) {}
+  const save = () => { try { localStorage.setItem(STORE_KEY, JSON.stringify(store)); } catch (e) {} };
+
+  /* ---------- state ---------- */
+  const S = { playlist: ALL.map(c => c.id), idx: 0, drill: null, cm: null, ch: null, keys: [], t0: 0, done: false, revealed: false, numbers: null };
+  const openMods = new Set();
+
+  const CM_OPTS = {
+    keyMap: 'vim', lineNumbers: true, indentUnit: 4, tabSize: 4, indentWithTabs: false, mode: null,
+    viewportMargin: Infinity, showCursorWhenSelecting: true, cursorBlinkRate: 0,
+    extraKeys: { Tab: cm => cm.execCommand('insertSoftTab') },
+  };
+
+  // The editor's Vim layer has no :delete, which :g/pattern/d needs.
+  Vim.defineEx('delete', 'd', (cm, p) => {
+    const a = p.line == null ? cm.getCursor().line : p.line;
+    const b = p.lineEnd == null ? a : p.lineEnd;
+    const text = cm.getRange({ line: a, ch: 0 }, { line: b, ch: cm.getLine(b).length }) + '\n';
+    Vim.getRegisterController().pushText(undefined, 'delete', text, true);
+    if (b < cm.lastLine()) cm.replaceRange('', { line: a, ch: 0 }, { line: b + 1, ch: 0 });
+    else if (a > 0) cm.replaceRange('', { line: a - 1, ch: cm.getLine(a - 1).length }, { line: b, ch: cm.getLine(b).length });
+    else cm.replaceRange('', { line: 0, ch: 0 }, { line: b, ch: cm.getLine(b).length });
+    const l = Math.min(a, cm.lastLine());
+    cm.setCursor(l, cm.getLine(l).search(/\S|$/));
+  });
+
+  function makeEditor(host, ch) {
+    host.innerHTML = '';
+    if (Vim.resetVimGlobalState_) Vim.resetVimGlobalState_();
+    const cm = CodeMirror(host, Object.assign({ value: ch.start }, CM_OPTS, { mode: ch.mode || null }));
+    cm.setCursor(ch.at[0], ch.at[1]);
+    cm.clearHistory();
+    return cm;
+  }
+
+  /* ---------- rail ---------- */
+  function renderRail() {
+    let solved = 0, stars = 0;
+    ALL.forEach(c => { const d = store.done[c.id]; if (d) { solved++; stars += d.stars; } });
+    $('tally').innerHTML = '<strong>' + solved + '</strong> / ' + ALL.length + ' solved · <strong>' + stars + '</strong> / ' + ALL.length * 3 + ' ★';
+    $('meter').style.width = (100 * stars / (ALL.length * 3)) + '%';
+    const curMod = S.ch && !S.drill ? S.ch.mod.id : null;
+    $('mods').innerHTML = MODULES.map(m => {
+      const n = m.items.filter(c => store.done[c.id]).length;
+      const open = m.id === curMod || openMods.has(m.id);
+      return '<details class="mod" data-mod="' + m.id + '"' + (open ? ' open' : '') + '><summary><span>' + esc(m.name) +
+        '</span><span class="mod-count' + (n === m.items.length ? ' full' : '') + '">' + n + '/' + m.items.length + '</span></summary><ol>' +
+        m.items.map(c => {
+          const d = store.done[c.id];
+          const cur = S.ch === c && !S.drill;
+          return '<li><button type="button" class="ch-link' + (cur ? ' cur' : '') + (d ? ' solved' : '') + '" data-id="' + c.id + '"><span>' + esc(c.t) +
+            '</span><span class="stars">' + (d ? starStr(d.stars) : '') + '</span></button></li>';
+        }).join('') + '</ol></details>';
+    }).join('');
+    $('btn-drill').textContent = S.drill ? 'Leave drill' : 'Start a drill';
+  }
+  $('mods').addEventListener('click', e => {
+    const b = e.target.closest('.ch-link');
+    if (!b) return;
+    S.drill = null; S.playlist = ALL.map(c => c.id);
+    load(S.playlist.indexOf(b.dataset.id));
+  });
+  $('mods').addEventListener('click', e => {
+    const sum = e.target.closest('summary');
+    if (!sum) return;
+    const d = sum.parentNode;
+    setTimeout(() => d.open ? openMods.add(d.dataset.mod) : openMods.delete(d.dataset.mod));
+  });
+
+  /* ---------- challenge view ---------- */
+  function load(idx) {
+    S.idx = Math.max(0, Math.min(idx, S.playlist.length - 1));
+    const ch = S.ch = BY_ID[S.playlist[S.idx]];
+    S.keys = []; S.t0 = 0; S.done = false; S.revealed = false;
+    if (!S.drill) { store.last = ch.id; save(); }
+    $('summary').hidden = true; $('play').hidden = false;
+    $('eyebrow').textContent = S.drill ? 'Drill' : ch.mod.name;
+    $('pos').textContent = S.drill ? (S.idx + 1) + ' of ' + S.playlist.length + ' · ' + ch.mod.name
+      : (ch.mod.items.indexOf(ch) + 1) + ' of ' + ch.mod.items.length;
+    $('title').textContent = ch.t;
+    $('goal').innerHTML = fmt(ch.goal) + (ch.target == null ? ' <span class="aside">Move the cursor to the outlined character.</span>' : '');
+    const d = store.done[ch.id];
+    $('best').textContent = d ? 'best ' + d.best + ' · ' + starStr(d.stars) : '';
+    $('note').hidden = true; $('result').hidden = true;
+    $('target-pane').hidden = ch.target == null;
+    $('work').classList.toggle('solo', ch.target == null);
+    $('btn-next').firstChild.textContent = 'Skip';
+    $('notes-title').textContent = 'Notes: ' + ch.mod.name;
+    $('notes-intro').innerHTML = fmt(ch.mod.intro);
+    $('notes-keys').innerHTML = ch.mod.keys.map(r => '<dt>' + esc(r[0]) + '</dt><dd>' + esc(r[1]) + '</dd>').join('');
+
+    const cm = S.cm = makeEditor($('editor'), ch);
+    // Keyboard only: a click focuses the buffer but never moves the cursor.
+    cm.getWrapperElement().addEventListener('mousedown', e => {
+      if (e.target.closest('.CodeMirror-dialog')) return;
+      e.preventDefault(); e.stopPropagation(); cm.focus();
+    }, true);
+    if (ch.to) {
+      const line = cm.getLine(ch.to[0]);
+      if (ch.to[1] < line.length) cm.markText({ line: ch.to[0], ch: ch.to[1] }, { line: ch.to[0], ch: ch.to[1] + 1 }, { className: 'aim' });
+      else cm.addLineClass(ch.to[0], 'background', 'aim-line');
+    }
+    cm.on('vim-mode-change', m => { setMode(m); queueCheck(); });
+    cm.on('change', () => { renderTarget(); queueCheck(); });
+    cm.on('cursorActivity', () => { S.numbers(); queueCheck(); });
+    cm.on('focus', () => $('buffer').classList.add('focused'));
+    cm.on('blur', () => $('buffer').classList.remove('focused'));
+    let lastLine = -1, lastRel = null;
+    S.numbers = () => {
+      const l = cm.getCursor().line;
+      if (l === lastLine && lastRel === store.rel) return;
+      lastLine = l; lastRel = store.rel;
+      cm.setOption('lineNumberFormatter', store.rel ? (n => String(n - 1 === l ? n : Math.abs(n - 1 - l))) : String);
+    };
+    S.numbers();
+    setMode({ mode: 'normal' });
+    renderTarget(); renderStatus(); renderRail();
+    cm.focus();
+  }
+
+  function setMode(m) {
+    const el = $('mode');
+    const name = m.mode === 'visual' ? (m.subMode === 'linewise' ? 'V-LINE' : m.subMode === 'blockwise' ? 'V-BLOCK' : 'VISUAL') : m.mode.toUpperCase();
+    el.textContent = name;
+    el.className = 'mode ' + m.mode;
+  }
+
+  function renderTarget() {
+    const ch = S.ch;
+    if (ch.target == null) return;
+    const have = S.cm.getValue().split('\n');
+    const want = ch.target.split('\n');
+    $('target').innerHTML = want.map((l, i) => '<div class="' + (have[i] === l && have.length === want.length ? 'same' : have[i] === l ? '' : 'diff') + '">' + (esc(l) || ' ') + '</div>').join('') +
+      (have.length > want.length ? '<div class="diff best">' + (have.length - want.length) + ' extra line' + (have.length - want.length > 1 ? 's' : '') + ' in your buffer</div>' : '');
+  }
+
+  function renderStatus() {
+    const n = S.keys.length, par = S.ch.par;
+    $('keylog').textContent = S.keys.slice(-40).map(keyLabel).join(' ');
+    const c = $('count');
+    c.textContent = n + (n === 1 ? ' key' : ' keys') + ' · par ' + par;
+    c.classList.toggle('over', n > par);
+  }
+
+  function eventKey(e) {
+    const k = e.key;
+    if (!k || ['Shift', 'Control', 'Alt', 'Meta', 'CapsLock', 'AltGraph', 'OS', 'Dead', 'Process', 'Unidentified', 'NumLock', 'ContextMenu'].includes(k)) return null;
+    const named = { Escape: 'Esc', Enter: 'CR', Backspace: 'BS', Tab: 'Tab', ' ': 'Space', Delete: 'Del', ArrowLeft: 'Left', ArrowRight: 'Right', ArrowUp: 'Up', ArrowDown: 'Down' }[k];
+    if (e.ctrlKey && !e.altKey) return k === '[' ? '<Esc>' : '<C-' + (named || k.toLowerCase()) + '>';
+    if (named) return '<' + named + '>';
+    return k.length === 1 ? k : '<' + k + '>';
+  }
+
+  document.addEventListener('keydown', e => {
+    if (!e.isTrusted) return;
+    if (e.altKey && !e.ctrlKey && !e.metaKey) {
+      const act = { KeyR: reset, KeyH: hint, KeyN: next, KeyP: prev }[e.code];
+      if (act && !$('play').hidden) { e.preventDefault(); e.stopPropagation(); act(); return; }
+    }
+    const inEditor = S.cm && S.cm.getWrapperElement().contains(e.target);
+    if (S.done || !$('summary').hidden) {
+      const plain = !e.ctrlKey && !e.metaKey && !e.altKey;
+      const onButton = e.target.closest && e.target.closest('button, summary, input');
+      if (plain && e.key === 'Enter' && !onButton) { e.preventDefault(); e.stopPropagation(); $('summary').hidden ? next() : startDrill(); }
+      else if (plain && e.key === 'r' && S.done) { e.preventDefault(); e.stopPropagation(); reset(); }
+      else if (inEditor && plain) { e.preventDefault(); e.stopPropagation(); }
+      return;
+    }
+    if (!inEditor) return;
+    const name = eventKey(e);
+    if (!name) return;
+    if (!S.keys.length) S.t0 = performance.now();
+    S.keys.push(name);
+    renderStatus();
+    queueCheck();
+  }, true);
+  document.addEventListener('keyup', () => { if (S.cm && !S.done) renderStatus(); }, true);
+
+  let checkTimer = 0;
+  function queueCheck() { clearTimeout(checkTimer); checkTimer = setTimeout(check, 0); }
+  function check() {
+    const cm = S.cm, ch = S.ch;
+    if (S.done || !S.keys.length || !cm) return;
+    const vim = cm.state.vim;
+    if (!vim || vim.insertMode || vim.visualMode) return;
+    if (cm.getWrapperElement().querySelector('.CodeMirror-dialog')) return;
+    if (ch.target != null && cm.getValue() !== ch.target) return;
+    if (ch.to) { const c = cm.getCursor(); if (c.line !== ch.to[0] || c.ch !== ch.to[1]) return; }
+    complete();
+  }
+
+  function scoreStars(n, par, revealed) {
+    if (revealed) return 1;
+    return n <= par ? 3 : n <= Math.ceil(par * 1.5) ? 2 : 1;
+  }
+
+  function complete() {
+    const ch = S.ch, n = S.keys.length;
+    S.done = true;
+    const secs = (performance.now() - S.t0) / 1000;
+    const stars = scoreStars(n, ch.par, S.revealed);
+    const prev = store.done[ch.id];
+    store.done[ch.id] = {
+      best: prev ? Math.min(prev.best, n) : n,
+      stars: prev ? Math.max(prev.stars, stars) : stars,
+      n: (prev ? prev.n : 0) + 1, last: Date.now(), lastStars: stars,
+    };
+    save();
+    if (S.drill) S.drill.results[S.idx] = { id: ch.id, keys: n, stars };
+    const last = S.idx === S.playlist.length - 1;
+    const verdict = n < ch.par ? 'Under par' : n === ch.par ? 'On par' : stars === 2 ? 'Close' : S.revealed ? 'Solved with the answer showing' : 'Solved';
+    const r = $('result');
+    r.innerHTML = '<h2><span>' + verdict + '</span><span class="big-stars" aria-label="' + stars + ' of 3 stars">' + starStr(stars) + '</span>' +
+      '<span class="best">' + n + ' keys · par ' + ch.par + ' · ' + secs.toFixed(1) + 's' + (prev && n < prev.best ? ' · new best' : '') + '</span></h2>' +
+      '<dl><dt>You typed</dt><dd>' + kbds(S.keys.slice(0, 80)) + (S.keys.length > 80 ? ' …' : '') + '</dd>' +
+      '<dt>Reference</dt><dd>' + kbds(ch.tokens) + '</dd></dl>' +
+      '<p class="why">' + fmt(ch.why) + (n < ch.par ? ' You found a shorter route than the reference.' : '') + '</p>' +
+      '<div class="actions"><button class="btn primary" type="button" id="res-next">' + (S.drill && last ? 'Finish drill' : last ? 'Back to the start' : 'Next') +
+      '<span class="sc">Enter</span></button><button class="btn" type="button" id="res-retry">Try again<span class="sc">r</span></button></div>';
+    r.hidden = false;
+    $('note').hidden = true;
+    $('res-next').onclick = next; $('res-retry').onclick = reset;
+    $('btn-next').firstChild.textContent = 'Next';
+    renderRail();
+    r.scrollIntoView({ block: 'nearest' });
+  }
+
+  function reset() { load(S.idx); }
+  function prev() { if (S.idx > 0) load(S.idx - 1); else S.cm && S.cm.focus(); }
+  function next() {
+    if (S.idx < S.playlist.length - 1) return load(S.idx + 1);
+    if (S.drill) return showSummary();
+    load(0);
+  }
+  function showNote(html) { const n = $('note'); n.innerHTML = html; n.hidden = false; S.cm.focus(); }
+  function hint() { if (!S.done) showNote('<p>' + fmt(S.ch.hint) + '</p>'); }
+  function solve() {
+    if (S.done) return;
+    S.revealed = true;
+    showNote('<p>' + kbds(S.ch.tokens) + '</p><p>' + fmt(S.ch.why) + '</p><p class="best">Type it yourself to finish. This attempt scores one star; press Alt+R afterwards and do it from memory.</p>');
+  }
+
+  /* ---------- drill: a short weighted review of what you know least well ---------- */
+  function startDrill() {
+    const solved = ALL.filter(c => store.done[c.id]);
+    const pool = solved.length >= 6 ? solved : ALL;
+    const now = Date.now();
+    const weighted = pool.map(c => {
+      const d = store.done[c.id];
+      const weak = d ? 4 - (d.lastStars || d.stars) : 2;
+      const age = d ? Math.min(7, (now - d.last) / 864e5) : 3;
+      return { c, w: Math.pow(Math.random(), 1 / (weak * 2 + age + 1)) };
+    }).sort((a, b) => b.w - a.w).slice(0, 8).map(x => x.c.id);
+    S.drill = { results: [], fromAll: pool === ALL };
+    S.playlist = weighted;
+    load(0);
+  }
+  function leaveDrill() {
+    S.drill = null; S.playlist = ALL.map(c => c.id);
+    load(Math.max(0, S.playlist.indexOf(store.last)));
+  }
+  function showSummary() {
+    const res = S.drill.results.filter(Boolean);
+    const keys = res.reduce((a, r) => a + r.keys, 0), par = res.reduce((a, r) => a + BY_ID[r.id].par, 0);
+    const stars = res.reduce((a, r) => a + r.stars, 0);
+    S.done = false; S.cm = null;
+    $('play').hidden = true;
+    const el = $('summary');
+    el.innerHTML = '<div><div class="eyebrow"><span>Drill complete</span></div><h1>' + keys + ' keys against a par of ' + par + '</h1></div>' +
+      '<p class="goal">' + stars + ' of ' + res.length * 3 + ' stars. Anything below three stars comes up more often in the next drill.</p>' +
+      '<table><thead><tr><th>Drill</th><th class="num">Keys</th><th class="num">Par</th><th>Stars</th></tr></thead><tbody>' +
+      res.map(r => '<tr><td>' + esc(BY_ID[r.id].t) + '</td><td class="num">' + r.keys + '</td><td class="num">' + BY_ID[r.id].par + '</td><td class="stars">' + starStr(r.stars) + '</td></tr>').join('') +
+      '</tbody></table><div class="actions"><button class="btn primary" type="button" id="sum-again">Another drill<span class="sc">Enter</span></button>' +
+      '<button class="btn" type="button" id="sum-back">Back to lessons</button></div>';
+    el.hidden = false;
+    $('sum-again').onclick = startDrill; $('sum-back').onclick = leaveDrill;
+    renderRail();
+  }
+
+  /* ---------- wiring ---------- */
+  $('btn-reset').onclick = reset; $('btn-hint').onclick = hint; $('btn-solve').onclick = solve;
+  $('btn-next').onclick = next; $('btn-prev').onclick = prev;
+  $('btn-drill').onclick = () => S.drill ? leaveDrill() : startDrill();
+  $('opt-rel').checked = !!store.rel;
+  $('opt-rel').onchange = e => { store.rel = e.target.checked; save(); if (S.numbers) S.numbers(); if (S.cm) S.cm.focus(); };
+  let wipeArmed = 0;
+  $('btn-wipe').onclick = e => {
+    if (Date.now() - wipeArmed < 4000) {
+      store.done = {}; save(); e.target.textContent = 'Reset progress'; wipeArmed = 0; load(S.idx);
+    } else { wipeArmed = Date.now(); e.target.textContent = 'Click again to erase all scores'; setTimeout(() => { if (wipeArmed) { e.target.textContent = 'Reset progress'; wipeArmed = 0; } }, 4000); }
+  };
+
+  /* ---------- self-test: replays every reference solution through the editor ---------- */
+  function feed(cm, tokens) {
+    for (const k of tokens) {
+      const dlg = cm.getWrapperElement().querySelector('.CodeMirror-dialog input');
+      if (dlg) {
+        if (k === '<CR>') dlg.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter', keyCode: 13, which: 13, bubbles: true }));
+        else { dlg.value += k === '<Space>' ? ' ' : k; dlg.dispatchEvent(new KeyboardEvent('keyup', { key: k, bubbles: true })); }
+        continue;
+      }
+      if (cm.state.vim.insertMode && !/^<(Esc|C-.)>$/.test(k)) {
+        if (k === '<CR>') cm.execCommand('newlineAndIndent');
+        else cm.replaceSelection(k === '<Space>' ? ' ' : k, 'end', '+input');
+      } else Vim.handleKey(cm, k, 'user');
+    }
+  }
+  window.vimRepsSelfTest = function () {
+    const host = document.createElement('div');
+    host.style.cssText = 'position:absolute;left:-9999px;top:0;width:900px';
+    document.body.appendChild(host);
+    const out = ALL.map(c => {
+      const cm = makeEditor(host, c);
+      let err = null;
+      try { feed(cm, c.tokens); } catch (e) { err = String(e); }
+      const cur = cm.getCursor(), vim = cm.state.vim;
+      const ok = !err && (c.target == null || cm.getValue() === c.target) && (!c.to || (cur.line === c.to[0] && cur.ch === c.to[1])) && !vim.insertMode && !vim.visualMode;
+      return { id: c.id, ok, err, got: cm.getValue(), cur: [cur.line, cur.ch], want: c.target, to: c.to };
+    });
+    host.remove();
+    if (Vim.resetVimGlobalState_) Vim.resetVimGlobalState_();
+    return out;
+  };
+
+  const startAt = S.playlist.indexOf(store.last);
+  load(startAt >= 0 ? startAt : 0);
+  if (location.hash === '#selftest') {
+    const res = window.vimRepsSelfTest();
+    const pre = document.createElement('pre');
+    pre.id = 'selftest-out';
+    pre.textContent = JSON.stringify(res.filter(r => !r.ok), null, 1) + '\nPASS ' + res.filter(r => r.ok).length + '/' + res.length;
+    document.body.appendChild(pre);
+  }
+})();
+</script>
